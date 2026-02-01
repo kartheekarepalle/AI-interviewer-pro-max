@@ -1,0 +1,1626 @@
+/**
+ * Cosmic Dashboard Styles
+ * 
+ * Premium AI Interface with Space/Cosmic Purple Theme
+ * Features animated stars, glassmorphism, and glowing effects
+ * Supports Light and Dark mode themes
+ */
+
+/* ===========================================
+   THEME VARIABLES - DARK MODE (Default)
+   =========================================== */
+.cosmic-dashboard {
+    /* Background - Enhanced opacity for better visibility */
+    --bg-primary: linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0a1628 100%);
+    --bg-secondary: rgba(15, 25, 45, 0.85);
+    --bg-card: rgba(15, 30, 55, 0.75);
+    --bg-card-hover: rgba(20, 40, 70, 0.85);
+    --bg-overlay: rgba(10, 22, 40, 0.92);
+    --bg-overlay-color: rgba(10, 22, 40, 0.6);
+
+    /* Text Colors - Brighter for better contrast */
+    --text-primary: #ffffff;
+    --text-secondary: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-accent: #c4b5fd;
+
+    /* Border Colors - More visible */
+    --border-primary: rgba(255, 255, 255, 0.18);
+    --border-secondary: rgba(255, 255, 255, 0.25);
+    --border-accent: rgba(139, 92, 246, 0.6);
+
+    /* Accent Colors */
+    --accent-primary: #6366f1;
+    --accent-secondary: #818cf8;
+    --accent-glow: rgba(99, 102, 241, 0.4);
+
+    /* Stats & Cards - Enhanced backgrounds */
+    --stat-bg: rgba(59, 130, 246, 0.25);
+    --stat-completed-bg: rgba(34, 197, 94, 0.25);
+    --stat-rating-bg: rgba(251, 191, 36, 0.25);
+
+    /* Robot Background - Enhanced visibility */
+    --robot-opacity: 0.55;
+    --robot-glow: rgba(99, 102, 241, 0.35);
+
+    /* Stars visibility */
+    --stars-opacity: 0.5;
+
+    /* Button backgrounds for dark mode */
+    --btn-bg: rgba(30, 45, 80, 0.85);
+    --btn-bg-hover: rgba(40, 60, 100, 0.9);
+}
+
+/* ===========================================
+   THEME VARIABLES - LIGHT MODE
+   =========================================== */
+:root.light .cosmic-dashboard,
+[data-theme="light"] .cosmic-dashboard {
+    /* Background - Clean solid gradient for light mode */
+    --bg-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    --bg-secondary: rgba(255, 255, 255, 0.5);
+    --bg-card: rgba(255, 255, 255, 0.75);
+    --bg-card-hover: rgba(255, 255, 255, 0.9);
+    --bg-overlay: rgba(255, 255, 255, 0.85);
+    --bg-overlay-color: transparent;
+
+    /* Text Colors - Strong contrast for readability */
+    --text-primary: #0f172a;
+    --text-secondary: #1e293b;
+    --text-muted: #475569;
+    --text-accent: #1d4ed8;
+
+    /* Border Colors - Visible but subtle */
+    --border-primary: rgba(30, 64, 175, 0.2);
+    --border-secondary: rgba(30, 64, 175, 0.25);
+    --border-accent: rgba(37, 99, 235, 0.5);
+
+    /* Accent Colors - Vibrant blue */
+    --accent-primary: #2563eb;
+    --accent-secondary: #3b82f6;
+    --accent-glow: transparent;
+
+    /* Stats & Cards - More visible backgrounds */
+    --stat-bg: rgba(37, 99, 235, 0.12);
+    --stat-completed-bg: rgba(22, 163, 74, 0.12);
+    --stat-rating-bg: rgba(234, 179, 8, 0.15);
+
+    /* Robot Background - More visible in light mode */
+    --robot-opacity: 0.75;
+    --robot-glow: transparent;
+
+    /* Stars visibility - hide in light mode */
+    --stars-opacity: 0;
+
+    /* Button colors for light mode */
+    --btn-text: #ffffff;
+    --btn-bg: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #1d4ed8 100%);
+}
+
+/* ===========================================
+   COSMIC DASHBOARD CONTAINER
+   =========================================== */
+.cosmic-dashboard {
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    background: var(--bg-primary);
+    transition: background 0.3s ease;
+}
+
+/* ===========================================
+   AI ROBOT BACKGROUND IMAGE - FULLSCREEN
+   =========================================== */
+.ai-robot-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.ai-robot-bg-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: var(--robot-opacity);
+    filter: blur(0px) saturate(1.1);
+    mask-image:
+        radial-gradient(ellipse 90% 85% at 50% 35%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image:
+        radial-gradient(ellipse 90% 85% at 50% 35%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0) 100%);
+    /* animation removed for stability */
+    transition: opacity 0.3s ease;
+}
+
+@keyframes bg-robot-breathe {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        filter: blur(0.5px) brightness(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.02);
+        filter: blur(0.5px) brightness(1.05);
+    }
+}
+
+.ai-robot-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 100% 70% at 50% 25%, var(--robot-glow) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.ai-robot-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, transparent 60%, var(--bg-overlay-color, rgba(10, 22, 40, 0.5)) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* ===========================================
+   ANIMATED COSMIC BACKGROUND
+   =========================================== */
+.cosmic-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: var(--stars-opacity);
+    transition: opacity 0.3s ease;
+}
+
+.cosmic-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 30%, var(--accent-glow) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, var(--accent-glow) 0%, transparent 70%);
+}
+
+/* Star layers - animated */
+.stars,
+.stars2,
+.stars3 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat;
+}
+
+.stars {
+    background-image:
+        radial-gradient(1px 1px at 20px 30px, white, transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 50px 160px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 80px 10px, white, transparent),
+        radial-gradient(1.5px 1.5px at 110px 80px, rgba(139, 92, 246, 0.8), transparent),
+        radial-gradient(1px 1px at 140px 140px, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 170px 30px, white, transparent),
+        radial-gradient(1px 1px at 200px 120px, rgba(255, 255, 255, 0.5), transparent);
+    background-size: 200px 200px;
+    animation: stars-drift 100s linear infinite;
+}
+
+.stars2 {
+    background-image:
+        radial-gradient(1px 1px at 10px 50px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1.5px 1.5px at 60px 100px, rgba(139, 92, 246, 0.6), transparent),
+        radial-gradient(1px 1px at 110px 20px, rgba(255, 255, 255, 0.4), transparent),
+        radial-gradient(1px 1px at 160px 80px, white, transparent);
+    background-size: 180px 180px;
+    animation: stars-drift 150s linear infinite;
+}
+
+.stars3 {
+    background-image:
+        radial-gradient(2px 2px at 30px 40px, rgba(168, 85, 247, 0.5), transparent),
+        radial-gradient(1.5px 1.5px at 80px 90px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 120px 50px, rgba(99, 102, 241, 0.4), transparent);
+    background-size: 150px 150px;
+    animation: stars-drift 200s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes stars-drift {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+/* ===========================================
+   MAIN CONTENT AREA
+   =========================================== */
+.cosmic-main {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 32px 100px;
+}
+
+/* ===========================================
+   ERROR BANNER
+   =========================================== */
+.cosmic-error {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    margin-bottom: 24px;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+    color: #f87171;
+    font-size: 0.9rem;
+}
+
+.cosmic-error button {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.cosmic-error button:hover {
+    opacity: 1;
+}
+
+/* ===========================================
+   HERO SECTION - FINAL BOSS MODE
+   =========================================== */
+.cosmic-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 200px 0 60px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Hero Title Badge - Premium Floating */
+.hero-title-badge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 42px;
+    background: linear-gradient(135deg, rgba(20, 30, 60, 0.95) 0%, rgba(15, 25, 50, 0.92) 100%);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(139, 92, 246, 0.5);
+    border-radius: 60px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 40px;
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(139, 92, 246, 0.3),
+        0 0 80px rgba(99, 102, 241, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    /* animations removed for stability */
+    transition: all 0.4s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+}
+
+.hero-title-badge:hover {
+    transform: translateY(-5px) scale(1.05);
+    border-color: rgba(139, 92, 246, 0.8);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(139, 92, 246, 0.5),
+        0 0 100px rgba(99, 102, 241, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.hero-title-badge svg {
+    color: #a78bfa;
+    filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.8));
+    /* animation removed for stability */
+}
+
+@keyframes badge-float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes icon-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.8));
+    }
+
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 15px rgba(167, 139, 250, 1));
+    }
+}
+
+@keyframes badge-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(139, 92, 246, 0.3), 0 0 80px rgba(99, 102, 241, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    50% {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(139, 92, 246, 0.5), 0 0 120px rgba(99, 102, 241, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* ===========================================
+   MAIN CTA BUTTON - FINAL BOSS EDITION
+   =========================================== */
+.cosmic-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 28px 80px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 35%, #a855f7 70%, #c084fc 100%);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 80px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow:
+        0 0 0 0 rgba(139, 92, 246, 0),
+        0 15px 50px rgba(99, 102, 241, 0.6),
+        0 5px 20px rgba(0, 0, 0, 0.3),
+        0 0 80px rgba(139, 92, 246, 0.3),
+        inset 0 3px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 45px;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+    /* animation removed for stability */
+}
+
+.cosmic-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    transition: left 0.6s ease;
+}
+
+.cosmic-cta:hover::before {
+    left: 100%;
+}
+
+.cosmic-cta:hover {
+    transform: translateY(-8px) scale(1.08);
+    box-shadow:
+        0 0 60px rgba(139, 92, 246, 0.7),
+        0 25px 80px rgba(99, 102, 241, 0.6),
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        0 0 120px rgba(139, 92, 246, 0.4),
+        inset 0 3px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 30%, #a855f7 60%, #d8b4fe 100%);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes cta-breathe {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(139, 92, 246, 0),
+            0 15px 50px rgba(99, 102, 241, 0.6),
+            0 5px 20px rgba(0, 0, 0, 0.3),
+            0 0 80px rgba(139, 92, 246, 0.3),
+            inset 0 3px 0 rgba(255, 255, 255, 0.35),
+            inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    50% {
+        box-shadow:
+            0 0 30px rgba(139, 92, 246, 0.4),
+            0 20px 60px rgba(99, 102, 241, 0.7),
+            0 8px 25px rgba(0, 0, 0, 0.35),
+            0 0 100px rgba(139, 92, 246, 0.4),
+            inset 0 3px 0 rgba(255, 255, 255, 0.4),
+            inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+    }
+}
+
+.cosmic-cta:active {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow:
+        0 0 20px rgba(139, 92, 246, 0.4),
+        0 5px 20px rgba(99, 102, 241, 0.35),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2);
+}
+
+.cosmic-cta svg {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.cosmic-cta:hover svg {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.cosmic-cta.small {
+    padding: 20px 48px;
+    font-size: 1.15rem;
+    gap: 12px;
+}
+
+.cosmic-cta svg {
+    width: 28px;
+    height: 28px;
+}
+
+.cta-glow {
+    position: absolute;
+    inset: -4px;
+    background: linear-gradient(135deg, #6366f1, #a855f7, #c084fc, #6366f1);
+    border-radius: 80px;
+    z-index: -1;
+    opacity: 0;
+    filter: blur(25px);
+    transition: opacity 0.5s ease;
+    animation: glow-rotate 4s linear infinite;
+}
+
+@keyframes glow-rotate {
+    0% {
+        filter: blur(25px) hue-rotate(0deg);
+    }
+
+    100% {
+        filter: blur(25px) hue-rotate(360deg);
+    }
+}
+
+.cosmic-cta:hover .cta-glow {
+    opacity: 0.8;
+}
+
+/* ===========================================
+   QUICK ACTION BUTTONS - FINAL BOSS STYLE
+   =========================================== */
+.quick-action-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.quick-action-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 48px;
+    background: linear-gradient(135deg, rgba(25, 40, 75, 0.95) 0%, rgba(20, 35, 65, 0.92) 100%);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 2px solid rgba(139, 92, 246, 0.5);
+    border-radius: 70px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    box-shadow:
+        0 8px 35px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(139, 92, 246, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.5px;
+}
+
+.quick-action-btn svg {
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(0 0 6px rgba(167, 139, 250, 0.6));
+    transition: all 0.3s ease;
+}
+
+.quick-action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.35) 0%, rgba(99, 102, 241, 0.25) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50px;
+}
+
+.quick-action-btn:hover::before {
+    opacity: 1;
+}
+
+.quick-action-btn:hover {
+    border-color: rgba(167, 139, 250, 0.9);
+    color: #ffffff;
+    transform: translateY(-6px) scale(1.05);
+    box-shadow:
+        0 15px 45px rgba(139, 92, 246, 0.5),
+        0 0 50px rgba(139, 92, 246, 0.35),
+        0 0 80px rgba(99, 102, 241, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.quick-action-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.quick-action-btn svg {
+    position: relative;
+    z-index: 1;
+    color: #a78bfa;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.6));
+}
+
+.quick-action-btn:hover svg {
+    transform: scale(1.2) rotate(5deg);
+    color: #ddd6fe;
+    filter: drop-shadow(0 0 15px rgba(221, 214, 254, 0.8));
+}
+
+.quick-action-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===========================================
+   STATS SECTION
+   =========================================== */
+.cosmic-stats-section {
+    margin-bottom: 40px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.section-header h2 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    transition: color 0.3s ease;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.cosmic-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.cosmic-stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(25, 40, 75, 0.9) 0%, rgba(20, 35, 65, 0.85) 100%);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(99, 102, 241, 0.3);
+    border-radius: 24px;
+    transition: all 0.4s ease;
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(99, 102, 241, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.cosmic-stat-card:hover {
+    background: linear-gradient(135deg, rgba(35, 55, 95, 0.95) 0%, rgba(30, 50, 85, 0.9) 100%);
+    border-color: rgba(139, 92, 246, 0.6);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35),
+        0 0 40px rgba(139, 92, 246, 0.25),
+        0 0 80px rgba(99, 102, 241, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%);
+    border-radius: 18px;
+    color: #a78bfa;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.cosmic-stat-card:hover .stat-icon {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+}
+
+.stat-icon svg {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0 0 6px rgba(167, 139, 250, 0.5));
+}
+
+.stat-icon.completed {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.3) 0%, rgba(16, 185, 129, 0.2) 100%);
+    color: #4ade80;
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.25);
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+.stat-icon.rating {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(245, 158, 11, 0.2) 100%);
+    color: #fbbf24;
+    box-shadow: 0 6px 20px rgba(251, 191, 36, 0.25);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-label {
+    display: block;
+    font-size: 1rem;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1;
+    transition: all 0.3s ease;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.cosmic-stat-card:hover .stat-value {
+    transform: scale(1.05);
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+.stat-visual {
+    margin-top: 16px;
+}
+
+.mini-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 30px;
+}
+
+.mini-bar {
+    width: 8px;
+    background: linear-gradient(180deg, #4ade80, #22c55e);
+    border-radius: 4px;
+    opacity: 0.7;
+}
+
+.rating-display {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.star-rating {
+    display: flex;
+    gap: 2px;
+}
+
+.star-rating svg {
+    color: #475569;
+    transition: color 0.2s;
+}
+
+.star-rating svg.filled {
+    color: #fbbf24;
+    filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.5));
+}
+
+.cosmic-stat-card.action {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--stat-bg), rgba(59, 130, 246, 0.1));
+    border-color: var(--border-accent);
+}
+
+.cosmic-stat-card.action:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(59, 130, 246, 0.15));
+}
+
+.cosmic-stat-card.action span {
+    font-weight: 600;
+    color: var(--text-accent);
+}
+
+.cosmic-stat-card.action svg {
+    color: var(--text-accent);
+}
+
+/* ===========================================
+   RECENT INTERVIEWS SECTION
+   =========================================== */
+.cosmic-recent-section {
+    margin-bottom: 40px;
+}
+
+.cosmic-recent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cosmic-recent-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 28px;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1.5px solid var(--border-primary);
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cosmic-recent-item:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-accent);
+    transform: translateX(4px);
+}
+
+.recent-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--stat-bg);
+    border-radius: 10px;
+    color: var(--text-accent);
+}
+
+.recent-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.recent-info strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.recent-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.recent-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-badge.completed {
+    background: var(--stat-bg);
+    color: var(--text-accent);
+}
+
+.status-badge.progress {
+    background: var(--stat-rating-bg);
+    color: #fbbf24;
+}
+
+.recent-status svg {
+    color: var(--text-muted);
+}
+
+/* ===========================================
+   EMPTY STATE
+   =========================================== */
+.cosmic-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 48px 24px;
+    background: var(--bg-secondary);
+    border: 1px dashed var(--border-secondary);
+    border-radius: 20px;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.cosmic-empty-state h3 {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin: 0 0 8px;
+}
+
+.cosmic-empty-state p {
+    color: var(--text-muted);
+    margin: 0 0 24px;
+    max-width: 300px;
+}
+
+/* ===========================================
+   USER CARD (Bottom)
+   =========================================== */
+.cosmic-user-card {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-secondary);
+    border-radius: 50px;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 50%;
+    font-weight: 700;
+    color: white;
+    font-size: 1rem;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info strong {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.user-info span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ===========================================
+   LOADING STATE
+   =========================================== */
+.cosmic-loading {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary, linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0a1628 100%));
+}
+
+:root.light .cosmic-loading,
+[data-theme="light"] .cosmic-loading {
+    background: linear-gradient(135deg, #e8f4fc 0%, #dbeafe 50%, #e0f2fe 100%);
+}
+
+.cosmic-loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.cosmic-spinner {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.spinner-ring {
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-top-color: var(--accent-primary, #3b82f6);
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+}
+
+.spinner-ring:nth-child(2) {
+    inset: 8px;
+    border-top-color: var(--accent-secondary, #60a5fa);
+    animation-delay: 0.2s;
+}
+
+.spinner-ring:nth-child(3) {
+    inset: 16px;
+    border-top-color: #93c5fd;
+    animation-delay: 0.4s;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.cosmic-loading p {
+    color: var(--text-muted, #64748b);
+    font-size: 0.9rem;
+}
+
+/* ===========================================
+   RESPONSIVE - TABLET
+   =========================================== */
+@media (max-width: 900px) {
+    .cosmic-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cosmic-hero {
+        padding: 160px 0 40px;
+    }
+
+    .hero-title-badge {
+        padding: 14px 28px;
+        font-size: 1.1rem;
+    }
+
+    .cosmic-cta {
+        padding: 22px 60px;
+        font-size: 1.3rem;
+    }
+
+    .quick-action-btn {
+        padding: 18px 32px;
+        font-size: 1rem;
+    }
+}
+
+/* ===========================================
+   RESPONSIVE - MOBILE
+   =========================================== */
+@media (max-width: 600px) {
+    .cosmic-main {
+        padding: 16px 12px 100px;
+    }
+
+    .cosmic-hero {
+        padding: 140px 0 32px;
+        margin-bottom: 30px;
+    }
+
+    .hero-title-badge {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+        gap: 10px;
+        margin-bottom: 24px;
+    }
+
+    .hero-title-badge svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .cosmic-cta {
+        padding: 18px 40px;
+        font-size: 1rem;
+        gap: 12px;
+        letter-spacing: 0.8px;
+        margin-bottom: 28px;
+        border-radius: 60px;
+    }
+
+    .cosmic-cta svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .quick-action-row {
+        width: 100%;
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .quick-action-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 24px;
+        font-size: 0.95rem;
+        gap: 12px;
+        border-radius: 50px;
+    }
+
+    .quick-action-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Section Headers */
+    .section-header {
+        margin-bottom: 20px;
+    }
+
+    .section-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* Stats Grid */
+    .cosmic-stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .cosmic-stat-card {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 14px;
+        border-radius: 14px;
+    }
+
+    .stat-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+    }
+
+    /* Recent Items */
+    .cosmic-recent-list {
+        gap: 10px;
+    }
+
+    .cosmic-recent-item {
+        padding: 16px;
+        gap: 14px;
+        border-radius: 14px;
+    }
+
+    .recent-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+
+    .recent-info strong {
+        font-size: 0.9rem;
+    }
+
+    .recent-date {
+        font-size: 0.7rem;
+    }
+
+    .status-badge {
+        padding: 5px 10px;
+        font-size: 0.65rem;
+    }
+
+    /* User Card */
+    .cosmic-user-card {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        padding: 10px 16px;
+        justify-content: center;
+        border-radius: 40px;
+    }
+
+    .user-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+
+    .user-info strong {
+        font-size: 0.85rem;
+    }
+
+    .user-info span {
+        font-size: 0.7rem;
+    }
+
+    /* Empty State */
+    .cosmic-empty-state {
+        padding: 32px 20px;
+    }
+
+    .cosmic-empty-state h3 {
+        font-size: 1rem;
+    }
+
+    .cosmic-empty-state p {
+        font-size: 0.85rem;
+    }
+}
+
+/* ===========================================
+   RESPONSIVE - SMALL MOBILE
+   =========================================== */
+@media (max-width: 380px) {
+    .cosmic-main {
+        padding: 12px 10px 90px;
+    }
+
+    .cosmic-hero {
+        padding: 120px 0 24px;
+    }
+
+    .hero-title-badge {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+
+    .cosmic-cta {
+        padding: 16px 32px;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    .quick-action-btn {
+        padding: 14px 20px;
+        font-size: 0.85rem;
+    }
+
+    .cosmic-stats-grid {
+        gap: 10px;
+    }
+
+    .cosmic-stat-card {
+        padding: 14px;
+    }
+
+    .stat-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .stat-value {
+        font-size: 1.7rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+    }
+}
+
+/* ===========================================
+   DARK MODE SPECIFIC OVERRIDES
+   =========================================== */
+:root:not(.light) .cosmic-dashboard,
+[data-theme="dark"] .cosmic-dashboard {
+
+    /* Ensure cards have solid backgrounds */
+    .cosmic-stat-card,
+    .cosmic-recent-item,
+    .cosmic-user-card,
+    .cosmic-empty-state {
+        background: linear-gradient(135deg, rgba(20, 35, 65, 0.9) 0%, rgba(15, 30, 55, 0.85) 100%);
+        border-color: rgba(99, 102, 241, 0.3);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .cosmic-stat-card:hover,
+    .cosmic-recent-item:hover {
+        background: linear-gradient(135deg, rgba(30, 50, 85, 0.95) 0%, rgba(25, 45, 75, 0.9) 100%);
+        border-color: rgba(139, 92, 246, 0.5);
+        box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    /* Section headers */
+    .section-header h2 {
+        color: #ffffff;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-subtitle {
+        color: #94a3b8;
+    }
+
+    /* Stats text */
+    .stat-value {
+        color: #ffffff;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-label {
+        color: #94a3b8;
+    }
+
+    /* Recent items text */
+    .recent-info strong {
+        color: #f1f5f9;
+    }
+
+    .recent-date {
+        color: #94a3b8;
+    }
+
+    /* Status badges */
+    .status-badge.completed {
+        background: rgba(99, 102, 241, 0.3);
+        color: #c4b5fd;
+        border: 1px solid rgba(139, 92, 246, 0.4);
+    }
+
+    .status-badge.progress {
+        background: rgba(251, 191, 36, 0.25);
+        color: #fde047;
+        border: 1px solid rgba(251, 191, 36, 0.4);
+    }
+
+    /* User card text */
+    .user-info strong {
+        color: #f1f5f9;
+    }
+
+    .user-info span {
+        color: #94a3b8;
+    }
+
+    /* Empty state */
+    .cosmic-empty-state h3 {
+        color: #f1f5f9;
+    }
+
+    .cosmic-empty-state p {
+        color: #94a3b8;
+    }
+
+    /* Stat icons */
+    .stat-icon,
+    .recent-icon {
+        background: rgba(99, 102, 241, 0.25);
+        color: #c4b5fd;
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+    }
+
+    .stat-icon.completed,
+    .recent-icon.completed {
+        background: rgba(34, 197, 94, 0.25);
+        color: #4ade80;
+    }
+
+    .stat-icon.rating {
+        background: rgba(251, 191, 36, 0.25);
+        color: #fde047;
+    }
+
+    /* Action card */
+    .cosmic-stat-card.action {
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(79, 70, 229, 0.2) 100%);
+        border-color: rgba(139, 92, 246, 0.5);
+    }
+
+    .cosmic-stat-card.action:hover {
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.4) 0%, rgba(79, 70, 229, 0.3) 100%);
+        box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
+    }
+
+    .cosmic-stat-card.action span {
+        color: #c4b5fd;
+    }
+}
+
+/* ===========================================
+   LIGHT MODE SPECIFIC OVERRIDES
+   =========================================== */
+:root.light .cosmic-dashboard .hero-title-badge,
+[data-theme="light"] .cosmic-dashboard .hero-title-badge {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+    border: 2px solid rgba(37, 99, 235, 0.35);
+    color: #1e3a8a;
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.12),
+        0 0 30px rgba(37, 99, 235, 0.15),
+        0 0 60px rgba(59, 130, 246, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    text-shadow: none;
+}
+
+:root.light .cosmic-dashboard .hero-title-badge svg,
+[data-theme="light"] .cosmic-dashboard .hero-title-badge svg {
+    color: #2563eb;
+    filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.5));
+}
+
+:root.light .cosmic-dashboard .hero-title-badge span,
+[data-theme="light"] .cosmic-dashboard .hero-title-badge span {
+    color: #1e3a8a;
+    font-weight: 800;
+}
+
+/* Light Mode CTA Button - Premium Blue with Strong Visibility */
+:root.light .cosmic-dashboard .cosmic-cta,
+[data-theme="light"] .cosmic-dashboard .cosmic-cta {
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 35%, #3b82f6 70%, #60a5fa 100%);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    box-shadow:
+        0 15px 50px rgba(37, 99, 235, 0.5),
+        0 5px 20px rgba(0, 0, 0, 0.2),
+        0 0 60px rgba(59, 130, 246, 0.3),
+        inset 0 3px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+}
+
+:root.light .cosmic-dashboard .cosmic-cta:hover,
+[data-theme="light"] .cosmic-dashboard .cosmic-cta:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #2563eb 35%, #3b82f6 70%, #93c5fd 100%);
+    box-shadow:
+        0 20px 70px rgba(37, 99, 235, 0.6),
+        0 10px 30px rgba(0, 0, 0, 0.2),
+        0 0 100px rgba(59, 130, 246, 0.4),
+        inset 0 3px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+}
+
+:root.light .cosmic-dashboard .cosmic-cta .cta-glow,
+[data-theme="light"] .cosmic-dashboard .cosmic-cta .cta-glow {
+    background: linear-gradient(135deg, #1d4ed8, #3b82f6, #1d4ed8);
+}
+
+/* Light Mode Quick Action Buttons - Clean & Modern with Strong Visibility */
+:root.light .cosmic-dashboard .quick-action-btn,
+[data-theme="light"] .cosmic-dashboard .quick-action-btn {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+    border: 2px solid rgba(37, 99, 235, 0.3);
+    color: #1e3a8a;
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 0 20px rgba(37, 99, 235, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    text-shadow: none;
+    font-weight: 700;
+}
+
+:root.light .cosmic-dashboard .quick-action-btn::before,
+[data-theme="light"] .cosmic-dashboard .quick-action-btn::before {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(59, 130, 246, 0.15) 100%);
+}
+
+:root.light .cosmic-dashboard .quick-action-btn:hover,
+[data-theme="light"] .cosmic-dashboard .quick-action-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 252, 0.98) 100%);
+    border-color: rgba(37, 99, 235, 0.6);
+    transform: translateY(-6px) scale(1.05);
+    box-shadow:
+        0 15px 45px rgba(37, 99, 235, 0.25),
+        0 5px 15px rgba(0, 0, 0, 0.1),
+        0 0 40px rgba(37, 99, 235, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+:root.light .cosmic-dashboard .quick-action-btn svg,
+[data-theme="light"] .cosmic-dashboard .quick-action-btn svg {
+    color: #2563eb;
+    filter: drop-shadow(0 0 4px rgba(37, 99, 235, 0.4));
+}
+
+:root.light .cosmic-dashboard .quick-action-btn:hover svg,
+[data-theme="light"] .cosmic-dashboard .quick-action-btn:hover svg {
+    color: #1d4ed8;
+    filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.6));
+}
+
+:root.light .cosmic-dashboard .cosmic-stat-card,
+[data-theme="light"] .cosmic-dashboard .cosmic-stat-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border: 1.5px solid rgba(37, 99, 235, 0.12);
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+:root.light .cosmic-dashboard .cosmic-stat-card:hover,
+[data-theme="light"] .cosmic-dashboard .cosmic-stat-card:hover {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: rgba(37, 99, 235, 0.25);
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(37, 99, 235, 0.1);
+}
+
+:root.light .cosmic-dashboard .cosmic-recent-item,
+[data-theme="light"] .cosmic-dashboard .cosmic-recent-item {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border: 1.5px solid rgba(37, 99, 235, 0.12);
+    box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+:root.light .cosmic-dashboard .cosmic-recent-item:hover,
+[data-theme="light"] .cosmic-dashboard .cosmic-recent-item:hover {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: rgba(37, 99, 235, 0.35);
+    box-shadow:
+        0 8px 25px rgba(37, 99, 235, 0.12),
+        0 0 0 1px rgba(37, 99, 235, 0.1);
+}
+
+:root.light .cosmic-dashboard .cosmic-user-card,
+[data-theme="light"] .cosmic-dashboard .cosmic-user-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border: 1.5px solid rgba(37, 99, 235, 0.15);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+:root.light .cosmic-dashboard .user-avatar,
+[data-theme="light"] .cosmic-dashboard .user-avatar {
+    background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+:root.light .cosmic-dashboard .cosmic-empty-state,
+[data-theme="light"] .cosmic-dashboard .cosmic-empty-state {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.85) 100%);
+    border: 2px dashed rgba(37, 99, 235, 0.25);
+}
+
+:root.light .cosmic-dashboard .status-badge.completed,
+[data-theme="light"] .cosmic-dashboard .status-badge.completed {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+    color: #1d4ed8;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+:root.light .cosmic-dashboard .stat-icon,
+[data-theme="light"] .cosmic-dashboard .stat-icon {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+    color: #2563eb;
+}
+
+:root.light .cosmic-dashboard .recent-icon,
+[data-theme="light"] .cosmic-dashboard .recent-icon {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+    color: #2563eb;
+}
+
+/* Light mode robot image - clear visibility without fog */
+:root.light .cosmic-dashboard .ai-robot-bg-image,
+[data-theme="light"] .cosmic-dashboard .ai-robot-bg-image {
+    filter: blur(0px) contrast(1.1) brightness(1) saturate(1.15);
+    opacity: 0.85;
+    mask-image: 
+        radial-gradient(ellipse 95% 90% at 50% 35%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.95) 70%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image: 
+        radial-gradient(ellipse 95% 90% at 50% 35%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.95) 70%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* Light mode - completely hide the glow overlay on robot */
+:root.light .cosmic-dashboard .ai-robot-bg::before,
+[data-theme="light"] .cosmic-dashboard .ai-robot-bg::before {
+    display: none;
+}
+
+/* Light mode - no overlay/fog effect - clear background */
+:root.light .cosmic-dashboard .ai-robot-bg::after,
+[data-theme="light"] .cosmic-dashboard .ai-robot-bg::after {
+    background: none;
+    display: none;
+}
+
+/* Light mode - hide cosmic gradient completely */
+:root.light .cosmic-dashboard .cosmic-bg,
+[data-theme="light"] .cosmic-dashboard .cosmic-bg {
+    display: none;
+}
+
+/* Light mode - hide cosmic gradient element */
+:root.light .cosmic-dashboard .cosmic-gradient,
+[data-theme="light"] .cosmic-dashboard .cosmic-gradient {
+    display: none;
+}

@@ -1,0 +1,40 @@
+# AI Interviewer Pro Max - Backend Dependencies
+
+# Web Framework
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+
+# Database
+sqlalchemy==2.0.25
+psycopg[binary]
+alembic==1.13.1
+
+# Authentication
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+
+# Validation
+pydantic==2.5.3
+pydantic-settings==2.1.0
+email-validator==2.1.0
+
+# AI Clients
+google-generativeai==0.3.2
+groq==0.4.2
+toon-format>=0.1.0  # Token-Oriented Object Notation for LLM token savings
+
+# File Processing
+python-docx==1.1.0
+PyPDF2==3.0.1
+
+# Utilities
+python-dotenv==1.0.0
+httpx==0.26.0
+aiofiles==23.2.1
+
+# Development
+pytest==7.4.4
+pytest-asyncio==0.23.3
+black==24.1.0
+isort==5.13.2

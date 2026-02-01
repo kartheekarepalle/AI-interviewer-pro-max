@@ -1,0 +1,354 @@
+/**
+ * Maintenance Page Styles
+ */
+
+.maintenance-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f0a1a 0%, #1a1025 50%, #0f0a1a 100%);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.maintenance-container {
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Floating animated elements */
+.floating-elements {
+    position: absolute;
+    inset: -100px;
+    pointer-events: none;
+}
+
+.float-element {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(168, 85, 247, 0.1));
+    animation: float 6s ease-in-out infinite;
+}
+
+.float-element.e1 {
+    width: 300px;
+    height: 300px;
+    top: -50px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.float-element.e2 {
+    width: 200px;
+    height: 200px;
+    bottom: -50px;
+    right: -50px;
+    animation-delay: 2s;
+}
+
+.float-element.e3 {
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 4s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translate(20px, -20px) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Main content */
+.maintenance-content {
+    position: relative;
+    text-align: center;
+    background: linear-gradient(145deg, rgba(30, 30, 50, 0.9), rgba(20, 20, 40, 0.95));
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(139, 92, 246, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.maintenance-icon {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(234, 88, 12, 0.1));
+    border-radius: 50%;
+    color: #f59e0b;
+}
+
+.maintenance-icon svg {
+    animation: wobble 2s ease-in-out infinite;
+}
+
+@keyframes wobble {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+.icon-ring {
+    position: absolute;
+    inset: -10px;
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    border-radius: 50%;
+    animation: pulse-ring 2s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.2;
+    }
+}
+
+.maintenance-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+}
+
+.maintenance-admin-message {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #fbbf24;
+    margin: 0 0 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(245, 158, 11, 0.15);
+    border-radius: 12px;
+    border-left: 4px solid #f59e0b;
+    text-align: left;
+    max-width: 500px;
+}
+
+.maintenance-subtitle {
+    font-size: 1rem;
+    color: #9ca3af;
+    margin: 0 0 1.5rem;
+}
+
+.maintenance-message-box {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.maintenance-message-box p {
+    margin: 0;
+    color: #fbbf24;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.maintenance-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.info-item svg {
+    color: #8b5cf6;
+}
+
+.maintenance-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.maintenance-actions .refresh-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.maintenance-actions .refresh-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.maintenance-actions .refresh-btn:active {
+    transform: translateY(0);
+}
+
+.maintenance-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+}
+
+.maintenance-footer p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.maintenance-footer .contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #4b5563;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+    .maintenance-page {
+        padding: 1rem;
+    }
+
+    .maintenance-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .maintenance-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .maintenance-icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .maintenance-icon svg {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Enhanced message box styles */
+.maintenance-message-box {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 16px;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(245, 158, 11, 0.15);
+    border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.admin-message {
+    margin: 0;
+    padding: 1.25rem;
+    color: #fef3c7;
+    font-size: 1rem;
+    line-height: 1.7;
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+/* Spinning animation for refresh */
+.refresh-btn.checking {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.refresh-btn svg.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Auto-check indicator */
+.auto-check-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse-indicator 2s ease-in-out infinite;
+}
+
+@keyframes pulse-indicator {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}

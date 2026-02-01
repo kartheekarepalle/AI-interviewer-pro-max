@@ -1,0 +1,589 @@
+/**
+ * Domain Selection Page Styles
+ * 
+ * Premium cosmic design with glassmorphism, gradients, and smooth animations
+ */
+
+/* ===========================================
+   CONTAINER & LAYOUT
+   =========================================== */
+
+.domain-selection-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e0efff 50%, #f5f0ff 100%);
+    position: relative;
+}
+
+[data-theme="dark"] .domain-selection-container {
+    background: linear-gradient(180deg, #0a1628 0%, #0d1f3c 50%, #0a1628 100%);
+}
+
+.domain-selection-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 30% at 70% 80%, rgba(167, 139, 250, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+[data-theme="dark"] .domain-selection-container::before {
+    background: 
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 30% at 70% 80%, rgba(167, 139, 250, 0.1) 0%, transparent 50%);
+}
+
+.domain-selection-main {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 24px 32px 60px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===========================================
+   BACK BUTTON - PREMIUM COSMIC
+   =========================================== */
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    border-radius: 14px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 24px;
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.05);
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(139, 92, 246, 0.3);
+    color: #6366f1;
+    transform: translateX(-6px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.1);
+}
+
+[data-theme="dark"] .back-button {
+    background: rgba(15, 25, 50, 0.8);
+    border-color: rgba(139, 92, 246, 0.25);
+    color: rgba(199, 210, 254, 0.8);
+}
+
+[data-theme="dark"] .back-button:hover {
+    background: rgba(15, 25, 50, 0.95);
+    border-color: rgba(139, 92, 246, 0.4);
+    color: #a78bfa;
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+}
+
+/* ===========================================
+   HEADER SECTION - PREMIUM COSMIC
+   =========================================== */
+
+.domain-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 2rem 2.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 28px;
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    box-shadow: 
+        0 8px 32px rgba(139, 92, 246, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    backdrop-filter: blur(20px);
+}
+
+[data-theme="dark"] .domain-header {
+    background: rgba(15, 25, 50, 0.85);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 50px rgba(139, 92, 246, 0.15),
+        0 0 0 1px rgba(139, 92, 246, 0.2) inset;
+}
+
+.header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.15));
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #7c3aed;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.1);
+}
+
+[data-theme="dark"] .header-badge {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.25));
+    border-color: rgba(139, 92, 246, 0.4);
+    color: #a78bfa;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.2);
+}
+
+.domain-header h1 {
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin: 0 0 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #1e293b 0%, #475569 50%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-theme="dark"] .domain-header h1 {
+    background: linear-gradient(135deg, #fff 0%, #e0e7ff 50%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(167, 139, 250, 0.4);
+}
+
+.header-sparkle {
+    color: #8b5cf6;
+    animation: sparkle-float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.5));
+}
+
+@keyframes sparkle-float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(10deg);
+    }
+}
+
+.header-subtitle {
+    font-size: 1.15rem;
+    color: #64748b;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .header-subtitle {
+    color: rgba(199, 210, 254, 0.8);
+}
+
+/* ===========================================
+   DOMAIN GRID - PREMIUM COSMIC
+   =========================================== */
+
+.domain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 48px;
+}
+
+/* ===========================================
+   DOMAIN CARD - PREMIUM COSMIC
+   =========================================== */
+
+.domain-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(139, 92, 246, 0.12);
+    border-radius: 24px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    box-shadow: 
+        0 8px 32px rgba(139, 92, 246, 0.05),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+}
+
+.domain-card:hover:not(.locked) {
+    transform: translateY(-8px);
+    border-color: var(--domain-color);
+    box-shadow:
+        0 24px 48px rgba(139, 92, 246, 0.15),
+        0 0 0 1px var(--domain-color),
+        0 0 40px color-mix(in srgb, var(--domain-color) 20%, transparent);
+}
+
+.domain-card.selected {
+    border-color: var(--domain-color);
+    box-shadow:
+        0 28px 56px rgba(139, 92, 246, 0.18),
+        0 0 50px color-mix(in srgb, var(--domain-color) 30%, transparent);
+}
+
+.domain-card.animating {
+    animation: card-select 0.4s ease-out;
+}
+
+@keyframes card-select {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(0.98);
+        opacity: 0.8;
+    }
+}
+
+/* Dark mode */
+[data-theme="dark"] .domain-card {
+    background: rgba(15, 25, 50, 0.85);
+    border-color: rgba(139, 92, 246, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(139, 92, 246, 0.15) inset;
+}
+
+[data-theme="dark"] .domain-card:hover:not(.locked) {
+    background: rgba(15, 25, 50, 0.95);
+    box-shadow:
+        0 24px 56px rgba(0, 0, 0, 0.4),
+        0 0 0 1px var(--domain-color),
+        0 0 50px color-mix(in srgb, var(--domain-color) 25%, transparent);
+}
+
+/* Locked State */
+.domain-card.locked {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.domain-card.locked:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Glow Effect */
+.card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: var(--domain-gradient);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, transparent 100%);
+}
+
+.domain-card:hover:not(.locked) .card-glow {
+    opacity: 1;
+}
+
+/* Coming Soon Badge */
+.coming-soon-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    background: rgba(100, 116, 139, 0.1);
+    border: 1px solid rgba(100, 116, 139, 0.2);
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+}
+
+[data-theme="dark"] .coming-soon-badge {
+    background: rgba(100, 116, 139, 0.2);
+    border-color: rgba(100, 116, 139, 0.3);
+    color: #94a3b8;
+}
+
+/* Icon Wrapper */
+.domain-icon-wrapper {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.domain-icon-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--domain-gradient);
+    border-radius: 16px;
+    opacity: 0.15;
+    transition: all 0.3s ease;
+}
+
+.domain-card:hover:not(.locked) .domain-icon-bg {
+    opacity: 0.25;
+    transform: scale(1.1);
+}
+
+.domain-icon {
+    position: relative;
+    z-index: 1;
+    color: var(--domain-color);
+    transition: transform 0.3s ease;
+}
+
+.domain-card:hover:not(.locked) .domain-icon {
+    transform: scale(1.1);
+}
+
+/* Content */
+.domain-content {
+    flex: 1;
+}
+
+.domain-name-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.domain-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+[data-theme="dark"] .domain-name {
+    color: #f1f5f9;
+}
+
+.domain-short {
+    padding: 4px 10px;
+    background: var(--domain-gradient);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.domain-description {
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin: 0 0 16px;
+}
+
+[data-theme="dark"] .domain-description {
+    color: #94a3b8;
+}
+
+/* Topic Tags */
+.domain-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.topic-tag {
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #475569;
+}
+
+[data-theme="dark"] .topic-tag {
+    background: rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
+}
+
+.topic-more {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--domain-color);
+}
+
+/* Action Indicator */
+.domain-action {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: var(--domain-gradient);
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.domain-card:hover:not(.locked) .domain-action {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================================
+   FOOTER
+   =========================================== */
+
+.domain-footer {
+    text-align: center;
+}
+
+.footer-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: rgba(139, 92, 246, 0.05);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    border-radius: 16px;
+}
+
+.footer-note svg {
+    color: #8b5cf6;
+}
+
+.footer-note p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+[data-theme="dark"] .footer-note {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.25);
+}
+
+[data-theme="dark"] .footer-note p {
+    color: #94a3b8;
+}
+
+/* ===========================================
+   RESPONSIVE
+   =========================================== */
+
+@media (max-width: 768px) {
+    .domain-selection-main {
+        padding: 16px 16px 40px;
+    }
+
+    .domain-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .header-subtitle {
+        font-size: 1rem;
+    }
+
+    .domain-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .domain-card {
+        padding: 20px;
+    }
+
+    .domain-icon-wrapper {
+        width: 52px;
+        height: 52px;
+    }
+
+    .domain-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .domain-name {
+        font-size: 1.1rem;
+    }
+
+    .footer-note {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+}
+
+/* ===========================================
+   ANIMATIONS
+   =========================================== */
+
+.domain-card {
+    animation: card-fade-in 0.5s ease-out backwards;
+}
+
+.domain-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.domain-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.domain-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.domain-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.domain-card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.domain-card:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+@keyframes card-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

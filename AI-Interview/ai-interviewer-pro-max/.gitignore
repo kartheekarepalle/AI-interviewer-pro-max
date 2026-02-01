@@ -1,0 +1,312 @@
+# ===========================================
+# AI Interviewer Pro Max - .gitignore
+# ===========================================
+
+# ===========================================
+# ENVIRONMENT & SECRETS (CRITICAL)
+# ===========================================
+# Never commit API keys, secrets, or credentials
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+*.env
+!.env.example
+
+# Secret keys and credentials
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+credentials/
+*.secret
+config.local.*
+
+# ===========================================
+# DATABASE FILES
+# ===========================================
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+ai_interviewer.db
+
+# Database dumps and backups
+*.sql
+*.dump
+*.bak
+db_backups/
+
+# ===========================================
+# PYTHON BACKEND
+# ===========================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+pytest_cache/
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.env.venv/
+pythonenv*/
+
+# pyenv
+.python-version
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ruff
+.ruff_cache/
+
+# ===========================================
+# NODE.JS FRONTEND
+# ===========================================
+# Dependencies
+node_modules/
+.npm
+.yarn/
+.pnp.*
+
+# Build outputs
+frontend/dist/
+dist/
+build/
+.next/
+out/
+
+# Package manager lock files (optional - some teams commit these)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage/
+*.lcov
+.nyc_output
+
+# TypeScript
+*.tsbuildinfo
+
+# ESLint
+.eslintcache
+
+# Vite
+*.local
+
+# ===========================================
+# UPLOADED FILES & USER DATA
+# ===========================================
+# Uploaded resumes and documents (contains PII)
+backend/uploads/
+uploads/
+*.pdf
+*.docx
+*.doc
+*.rtf
+
+# User session data
+sessions/
+temp/
+tmp/
+
+# ===========================================
+# IDE & EDITOR
+# ===========================================
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains IDEs (PyCharm, WebStorm, etc.)
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+auto-save-list
+tramp
+
+# ===========================================
+# OPERATING SYSTEM
+# ===========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===========================================
+# LOGS & DEBUGGING
+# ===========================================
+logs/
+*.log
+log/
+*.log.*
+debug/
+
+# ===========================================
+# MISCELLANEOUS
+# ===========================================
+# Archives
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+.temp/
+.tmp/
+
+# Documentation generated
+docs/_build/
+site/
+
+# Docker (if using docker-compose with local overrides)
+docker-compose.override.yml
+docker-compose.local.yml
+.docker/
+
+# AWS
+.aws/
+
+# Google Cloud
+.gcloud/
+service-account*.json
+
+# Terraform (if used for infrastructure)
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# ===========================================
+# PROJECT-SPECIFIC EXCLUSIONS
+# ===========================================
+# Interview recordings (if any)
+recordings/
+*.webm
+*.mp4
+*.mp3
+*.wav
+
+# Generated reports
+generated_reports/
+exports/
+
+# Local testing files
+test_data/
+mock_data/
+*.local.json
