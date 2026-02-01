@@ -13,17 +13,15 @@ A comprehensive interview preparation system that leverages AI to provide realis
 
 ## Live Deployment & Demo
 
-# 🌐 Live Application
+### 🌐 Live Application
 
 👉 Deployment URL:
 
 https://chowdary1-ai-interviewer-version-1.hf.space/login
 
-# 🎥 Project Demo Video
+### 🎥 Project Demo Video
 
-<video width="800" controls>
-  <source src="demo.mp4" type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/6d3b8ed9-1d27-4864-9763-235635add94c
 
 ---
 
